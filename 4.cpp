@@ -41,16 +41,12 @@ int main()
     vector<Card> a;
     for (string line; getline(cin, line);) a.push_back(Card(line));
 
-    long long z { 0 }, z2 { 0 };
+    long long z { 0 };
     vector<int> add(a.size(), 1);
     for (auto i = 0; auto x : a)
     {
         if (x.pts) z += 1 << (x.pts - 1);
-
         for (int j = i + 1; j <= i + x.pts; ++j) add[j] += add[i];
-        if (x.pts)
-            z2 += add[i] * (1 << (x.pts - 1));
-
         ++i;
     }
     cout << z << endl << accumulate(add.begin(), add.end(), 0ll);
